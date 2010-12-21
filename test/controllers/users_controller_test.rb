@@ -50,7 +50,7 @@ class UsersControllerTest < ActionController::TestCase
 
   context "A signed-in user" do
     setup do
-      @user = Factory(:email_confirmed_user)
+      @user = Factory(:user)
       sign_in_as @user
     end
 

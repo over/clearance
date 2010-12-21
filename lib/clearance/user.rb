@@ -68,7 +68,6 @@ module Clearance
                         :encrypt_password
           before_create :generate_confirmation_token,
                         :generate_remember_token
-          after_create  :send_confirmation_email, :unless => :email_confirmed?
         end
       end
     end
@@ -98,16 +97,6 @@ module Clearance
       #   user.reset_remember_token!
       def reset_remember_token!
         generate_remember_token
-        save(:validate => false)
-      end
-
-      # Confirm my email.
-      #
-      # @example
-      #   user.confirm_email!
-      def confirm_email!
-        self.email_confirmed    = true
-        self.confirmation_token = nil
         save(:validate => false)
       end
 
@@ -182,10 +171,6 @@ module Clearance
       def password_required?
         # warn "[DEPRECATION] password_required?: use !password_optional? instead"
         !password_optional?
-      end
-
-      def send_confirmation_email
-        ClearanceMailer.confirmation(self).deliver
       end
     end
 

@@ -38,10 +38,6 @@ class UserTest < ActiveSupport::TestCase
       assert_not_nil Factory(:user).salt
     end
 
-    should "initialize confirmation token" do
-      assert_not_nil Factory(:user).confirmation_token
-    end
-
     context "encrypt password" do
       setup do
         @salt = "salt"
@@ -67,42 +63,9 @@ class UserTest < ActiveSupport::TestCase
     should have_sent_email.with_subject(/account confirmation/i)
   end
 
-  context "When signing up with email already confirmed" do
-    setup do
-      ActionMailer::Base.deliveries.clear
-      Factory(:user, :email_confirmed => true)
-    end
-
-    should_not have_sent_email
-  end
-
   context "When multiple users have signed up" do
     setup { Factory(:user) }
     should validate_uniqueness_of(:email)
-  end
-
-  # confirming email
-
-  context "A user without email confirmation" do
-    setup do
-      @user = Factory(:user)
-      assert ! @user.email_confirmed?
-    end
-
-    context "after #confirm_email!" do
-      setup do
-        assert @user.confirm_email!
-        @user.reload
-      end
-
-      should "have confirmed their email" do
-        assert @user.email_confirmed?
-      end
-
-      should "reset confirmation token" do
-        assert_nil @user.confirmation_token
-      end
-    end
   end
 
   # authenticating
@@ -173,11 +136,10 @@ class UserTest < ActiveSupport::TestCase
 
   # recovering forgotten password
 
-  context "An email confirmed user" do
+  context "An user" do
     setup do
       @user = Factory(:email_confirmed_user)
       @old_encrypted_password = @user.encrypted_password
-      @user.confirm_email!
     end
 
     context "who requests password reminder" do
