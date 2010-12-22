@@ -17,4 +17,4 @@ Feature: Sign up
       And I fill in "Password" with "password"
       And I fill in "Confirm password" with "password"
       And I press "Sign up"
-      Then I should see "welcome"
+      Then I should see "signed up"

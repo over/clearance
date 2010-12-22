@@ -22,7 +22,7 @@ Given /^I signed up with "(.*)\/(.*)"$/ do |email, password|
 end
 
 Given /^I am signed up and confirmed as "([^"]+)"$/ do |email_password|
-  Given %{I am signed up with "#{email_password}"}
+  Given %{I signed up with "#{email_password}"}
 end
 
 # Session
