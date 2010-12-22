@@ -11,14 +11,14 @@ Feature: Sign in
       And I should be signed out
 
    Scenario: User enters wrong password
-      Given I am signed up and confirmed as "email@person.com/password"
+      Given I am signed up as "email@person.com/password"
       When I go to the sign in page
       And I sign in as "email@person.com/wrongpassword"
       Then I should see "Bad email or password"
       And I should be signed out
 
    Scenario: User signs in successfully
-      Given I am signed up and confirmed as "email@person.com/password"
+      Given I am signed up as "email@person.com/password"
       When I go to the sign in page
       And I sign in as "email@person.com/password"
       Then I should see "Signed in"

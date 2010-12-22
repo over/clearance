@@ -21,7 +21,7 @@ Given /^I signed up with "(.*)\/(.*)"$/ do |email, password|
           :password_confirmation => password)
 end
 
-Given /^I am signed up and confirmed as "([^"]+)"$/ do |email_password|
+Given /^I am signed up as "([^"]+)"$/ do |email_password|
   Given %{I signed up with "#{email_password}"}
 end
 
