@@ -59,8 +59,6 @@ class UserTest < ActiveSupport::TestCase
       user = Factory(:user, :email => "John.Doe@example.com")
       assert_equal "John.Doe@example.com", user.email
     end
-
-    should have_sent_email.with_subject(/account confirmation/i)
   end
 
   context "When multiple users have signed up" do
