@@ -4,6 +4,7 @@ class ClearanceMailerTest < ActiveSupport::TestCase
   context "A change password email" do
     setup do
       @user  = Factory(:user)
+      @user.forgot_password!
       @email = ClearanceMailer.change_password @user
     end
 
