@@ -91,7 +91,7 @@ class UserTest < ActiveSupport::TestCase
 
   context "When resetting authentication with reset_remember_token!" do
     setup do
-      @user  = Factory(:email_confirmed_user)
+      @user  = Factory(:user)
       @user.remember_token = "old-token"
       @user.reset_remember_token!
     end
@@ -105,7 +105,7 @@ class UserTest < ActiveSupport::TestCase
 
   context "An email confirmed user" do
     setup do
-      @user = Factory(:email_confirmed_user)
+      @user = Factory(:user)
       @old_encrypted_password = @user.encrypted_password
     end
 
@@ -124,10 +124,10 @@ class UserTest < ActiveSupport::TestCase
   should "not generate the same remember token for users with the same password at the same time" do
     Time.stubs(:now => Time.now)
     password    = 'secret'
-    first_user  = Factory(:email_confirmed_user,
+    first_user  = Factory(:user,
                           :password              => password,
                           :password_confirmation => password)
-    second_user = Factory(:email_confirmed_user,
+    second_user = Factory(:user,
                           :password              => password,
                           :password_confirmation => password)
 
@@ -138,7 +138,7 @@ class UserTest < ActiveSupport::TestCase
 
   context "An user" do
     setup do
-      @user = Factory(:email_confirmed_user)
+      @user = Factory(:user)
       @old_encrypted_password = @user.encrypted_password
     end
 
