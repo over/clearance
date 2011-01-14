@@ -1,17 +1,13 @@
 <h2>Sign in</h2>
 
-<%= form_for :session, :url => session_path do |form| %>
-  <div class="text_field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-  <div class="text_field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
-  <div class="submit_field">
-    <%= form.submit "Sign in", :disable_with => "Please wait..." %>
-  </div>
+<%= semantic_form_for :session, :url => session_path do |form| %>
+  <%= form.inputs do %>
+    <%= form.input :email %>
+    <%= form.input :password, :as => :password %>
+  <% end %>
+  <%= form.buttons do %>
+    <%= form.commit_button "Sign in" %>
+  <% end %>
 <% end %>
 
 <ul>
@@ -22,3 +18,4 @@
     <%= link_to "Forgot password?", new_password_path %>
   </li>
 </ul>
+
