@@ -49,8 +49,9 @@ module Clearance
       def self.included(model)
         model.class_eval do
           validates_presence_of     :email, :unless => :email_optional?
-          validates_uniqueness_of   :email, :case_sensitive => false, :allow_blank => true
-          validates_format_of       :email, :with => %r{^[a-z0-9!#\$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#\$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$}i, :allow_blank => true
+          validates_uniqueness_of   :email, :case_sensitive => false, :allow_blank => true, :unless => :email_optional?
+          validates_format_of       :email, :with => %r{^[a-z0-9!#\$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#\$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$}i, :allow_blank => true, :unless => :email_optional?
+
 
           validates_presence_of     :password, :unless => :password_optional?
           validates_confirmation_of :password
